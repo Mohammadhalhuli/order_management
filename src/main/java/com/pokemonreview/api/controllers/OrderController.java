@@ -2,8 +2,6 @@ package com.pokemonreview.api.controllers;
 import com.pokemonreview.api.dto.Orderdto;
 import com.pokemonreview.api.models.Order;
 import com.pokemonreview.api.service.impl.OrderDao;
-//import io.swagger.annotations.Api;
-//import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.jaxb.SpringDataJaxb;
 import org.springframework.http.HttpStatus;
@@ -12,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
-//@Api(value = "Order controller Rest api all Order")
+//@Tag(name = "Order controller Rest api all Order")
 @RequestMapping("/api/v1/Order_M")
 @RestController
 public class OrderController {
@@ -23,7 +21,7 @@ public class OrderController {
     */
     @Autowired
     private OrderDao orderDao;
-    //@ApiOperation(value = "Order controller REST API to add")
+    //@Operation(description = "Order controller REST API to add")
     @PostMapping("/add/customer/{id}")
     public ResponseEntity<Orderdto> createOrder( @RequestBody Orderdto orderDto, @PathVariable(name="id") Integer id){
         if(orderDto.getOrder_id()!=null){
@@ -31,23 +29,23 @@ public class OrderController {
         }
         return new ResponseEntity(orderDao.add(orderDto,id), HttpStatus.CREATED);
     }
-    //@ApiOperation(value = "order controller REST API to edit order")
+    //@Operation(description = "order controller REST API to edit order")
     @PutMapping("update/{order_id}")
     public ResponseEntity<Orderdto> update(@PathVariable(name="order_id") Integer order_id, @RequestBody Orderdto orderDto){
         return new ResponseEntity(orderDao.update(order_id,orderDto),HttpStatus.OK);
     }
-    //@ApiOperation(value = "order controller REST API to delete order")
+    //@Operation(description = "order controller REST API to delete order")
     @DeleteMapping("/delete/{order_id}")
     public ResponseEntity<String> deleteOrder(@PathVariable(name="order_id") Integer order_id){
         orderDao.delete(order_id);
         return new ResponseEntity<>("Deleted successfully",HttpStatus.OK);
     }
-    //@ApiOperation(value = "order controller REST API to get all order")
+    //@Operation(description = "order controller REST API to get all order")
     @GetMapping("get")
     public ResponseEntity<List<Orderdto>> getAllOrders(){
         return ResponseEntity.ok().body(orderDao.get());
     }
-    //@ApiOperation(value = "order controller REST API to get order by id")
+    //@Operation(description = "order controller REST API to get order by id")
     @GetMapping("get/{order_id}")
     public ResponseEntity<Orderdto> getOrderById(@PathVariable(name="order_id") Integer order_id){
         return ResponseEntity.ok().body(orderDao.getById(order_id));

@@ -11,13 +11,13 @@ import java.math.BigDecimal;
 //@Setter
 @Data
 public class Product_Orderdto {
-    //private int product_order_id;
-    private Product_OrderClass productOrderClass;
+    private int product_order_id;
+    //private Product_OrderClass productOrderClass;
     private int quantity;
     @Column(precision = 10,scale = 2)
     private BigDecimal price;
     @Column(precision = 10,scale = 2)
     private BigDecimal vat;
-    //private int prduct_id;
-   //private int order_id;
+    private int prduct_id;
+    private int order_id;
 }

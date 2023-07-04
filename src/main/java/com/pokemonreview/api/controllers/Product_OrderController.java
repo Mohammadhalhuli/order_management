@@ -3,8 +3,6 @@ package com.pokemonreview.api.controllers;
 import com.pokemonreview.api.dto.Product_Orderdto;
 import com.pokemonreview.api.models.Product_Order;
 import com.pokemonreview.api.service.impl.Product_OrderDao;
-//import io.swagger.annotations.Api;
-//import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-//@Api(value = "product_order controller Rest api all product_order")
+//@Tag(name = "product_order controller Rest api all product_order")
 @RequestMapping( "/api/v1/product_order")
 @RestController
 public class Product_OrderController {
@@ -25,37 +23,35 @@ public class Product_OrderController {
     @Autowired
 
     private Product_OrderDao product_orderDao;
-    //@ApiOperation(value = "product_order controller REST API to add")
-    @PostMapping("add/product/{prduct_id}/order/{order_id}")
+    //@Operation (description = "product_order controller REST API to add")
+    @PostMapping("product/{prduct_id}/order/{order_id}")
     public ResponseEntity<Product_Orderdto> add(@PathVariable(name="prduct_id")Integer prduct_id
             , @PathVariable(name="order_id")Integer order_id, @RequestBody Product_Orderdto Product_Orderdto){
         return new ResponseEntity(product_orderDao.add(Product_Orderdto,prduct_id,order_id), HttpStatus.CREATED);
     }
-    //@ApiOperation(value = "product_order controller REST API to edit product_order")
+    //@Operation(description = "product_order controller REST API to edit product_order")
     @PutMapping("update/product/{prduct_id}/order/{oid}")
-    public ResponseEntity<Product_Orderdto> update(@PathVariable(name="prduct_id") Integer prduct_id
-            , @PathVariable(name="order_id") Integer order_id,  @RequestBody Product_Orderdto Product_Orderdto){
-        return new ResponseEntity(product_orderDao.update(prduct_id,order_id,Product_Orderdto),HttpStatus.OK);
+    public ResponseEntity<Product_Orderdto> update(@PathVariable(name="product_order_id") Integer product_order_id
+            ,  @RequestBody Product_Orderdto Product_Orderdto){
+        return new ResponseEntity(product_orderDao.update(product_order_id,Product_Orderdto),HttpStatus.OK);
     }
 
-    //@ApiOperation(value = "product_order controller REST API to product_order customer")
-    @DeleteMapping("delete/product/{prduct_id}/order/{order_id}")
-    public ResponseEntity<String> delete(@PathVariable(name="prduct_id")Integer prduct_id
-            , @PathVariable(name="order_id")Integer order_id){
-        product_orderDao.delete(prduct_id,order_id);
+   // @Operation(description = "product_order controller REST API to product_order customer")
+    @DeleteMapping("delete/{product_order_id}")
+    public ResponseEntity<String> delete(@PathVariable(name="product_order_id")Integer product_order_id){
+        product_orderDao.delete(product_order_id);
         return new ResponseEntity("Deleted successfully",HttpStatus.OK);
     }
-    //@ApiOperation(value = "product_order controller REST API to get all product_order")
+   // @Operation(description = "product_order controller REST API to get all product_order")
     @GetMapping("get")
     public ResponseEntity<List<Product_Orderdto>> getAllProduct_orders(){
         return ResponseEntity.ok().body(product_orderDao.get());
     }
 
-    //@ApiOperation(value = "product_order controller REST API to get product_order by id")
-    @GetMapping("get/product/{prduct_id}/order/{order_id}")
-    public ResponseEntity<Product_Orderdto> getProduct_orderById(@PathVariable(name="prduct_id")Integer prduct_id,
-                                                                 @PathVariable(name="order_id")Integer order_id){
-        return  ResponseEntity.ok().body(product_orderDao.getById(prduct_id,order_id));
+    //@Operation(description = "product_order controller REST API to get product_order by id")
+    @GetMapping("get/{product_order_id}")
+    public ResponseEntity<Product_Orderdto> getProduct_orderById(@PathVariable(name="Integer product_order_id")Integer  product_order_id){
+        return  ResponseEntity.ok().body(product_orderDao.getById(product_order_id));
     }
 
 /*

@@ -8,30 +8,30 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-//@Table(name = "Product_Order")
+@Table(name = "Product_Ordernew")
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@IdClass(
+/*@IdClass(
         Product_OrderClass.class
-)
+)*/
 public class Product_Order  {
-/*
+
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    @Column(name = "product_order_id")
-   private int product_order_id;*/
-    @Id
+   private int product_order_id;
+    //@Id
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="prduct_id" , referencedColumnName = "prduct_id")
+    @JoinColumn(name="prduct_id" , referencedColumnName = "prduct_id" , nullable = false)
     private Product prduct_id;
 
-    @Id
+    //@Id
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="order_id" , referencedColumnName = "order_id")
+    @JoinColumn(name="order_id" , referencedColumnName = "order_id" , nullable = false)
     private Order order_id;
 
     @Column(name = "quantity")

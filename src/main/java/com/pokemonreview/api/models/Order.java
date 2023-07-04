@@ -47,5 +47,5 @@ public class Order {
     @OneToMany(mappedBy = "Order")
     private List<Product_Order> productOrders;*/
     @OneToMany(mappedBy = "order_id")
-    private List<Product_Order> orderId ;
+    private List<Product_Order> order ;
 }

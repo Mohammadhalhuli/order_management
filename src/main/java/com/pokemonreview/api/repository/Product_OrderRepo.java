@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface Product_OrderRepo extends JpaRepository<Product_Order, Product_OrderClass> {
+public interface Product_OrderRepo extends JpaRepository<Product_Order, Integer> {
 
 }
